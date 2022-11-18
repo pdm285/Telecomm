@@ -6,7 +6,8 @@
   "scripts": {
     "whatsapp:receiver": "python3 WhatsApp/receiver.py",
     "whatsapp:caller":"python3 WhatsApp/caller.py",
-    "whatsapp:test": "python3 WhatsApp/WhatsApp.py"
+    "whatsapp:test": "python3 WhatsApp/main.py",
+    "cod:test": "python3 COD/main.py"
   },
   "repository": {
     "type": "git",
