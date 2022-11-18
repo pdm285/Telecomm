@@ -1,0 +1,34 @@
+{
+    "pixel4xl_1":
+        {
+            "deviceName": "Pixel 4 XL",
+            "udid": "99151FFBA003EP",
+            "automationName": "UiAutomator2",
+            "appPackage": "com.android.settings",
+            "platformName": "Android",
+            "appActivity": "com.android.settings.Settings",
+            "app":"",
+            "appium_url":"https://dev-us-mv-0.headspin.io:3012/v0/6a4378b310dc4d95b712f5da9ef7accb/wd/hub"
+        },
+        "pixel4xl_2":
+        {
+            "deviceName": "Pixel 4 XL",
+            "udid": "9A281FFBA003YA",
+            "automationName": "uiautomator2",
+            "appPackage": "com.android.settings",
+            "platformName": "android",
+            "appActivity": "com.android.settings.Settings",
+            "appium_url":"https://dev-us-mv-0.headspin.io:3012/v0/6a4378b310dc4d95b712f5da9ef7accb/wd/hub"
+        },
+    "iphone11pro":
+        {
+            "deviceName": "iPhone 11 Pro",
+            "udid": "00008030-00190D4E22A0802E",
+            "automationName": "XCUITest",
+            "platformVersion": "15.5",
+            "platformName": "iOS",
+            "bundleId": "com.apple.Preferences",
+            "appium_url": "https://dev-us-pao-1.headspin.io:7021/v0/bcacd8db53f5456ebccdc32124985730/wd/hub"
+        }
+}
+
