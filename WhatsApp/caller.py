@@ -27,7 +27,7 @@ try:
 
     el4 = driver.find_element(by=AppiumBy.ID, value="android:id/button1")
     el4.click()
-    sleep(6)
+    sleep(10)
 
     el5 = driver.find_element(by=AppiumBy.ID, value="com.whatsapp:id/submit")
     el5.click()
