@@ -8,7 +8,8 @@
             "platformName": "Android",
             "appActivity": "com.android.settings.Settings",
             "app":"",
-            "appium_url":"https://dev-us-mv-0.headspin.io:3012/v0/6a4378b310dc4d95b712f5da9ef7accb/wd/hub"
+            "appium_url":"https://dev-us-mv-0.headspin.io:3012/v0/6a4378b310dc4d95b712f5da9ef7accb/wd/hub",
+            "phone_number": "16504178091"
         },
         "pixel4xl_2":
         {
@@ -18,7 +19,8 @@
             "appPackage": "com.android.settings",
             "platformName": "android",
             "appActivity": "com.android.settings.Settings",
-            "appium_url":"https://dev-us-mv-0.headspin.io:3012/v0/6a4378b310dc4d95b712f5da9ef7accb/wd/hub"
+            "appium_url":"https://dev-us-mv-0.headspin.io:3012/v0/6a4378b310dc4d95b712f5da9ef7accb/wd/hub",
+            "phone_number": "16504178091"
         },
     "iphone11pro":
         {
