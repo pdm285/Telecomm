@@ -13,7 +13,7 @@ import os
 
 
 
-os.environ["HS_TOKEN"] = 'd20f04e28a0e436f9899c7aed2f92b82'
+os.environ["HS_TOKEN"] = ''
 TOKEN = os.environ.get("HS_TOKEN")
 ENDPOINT = "https://teleworld-api.headspin.io"
 
