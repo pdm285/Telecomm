@@ -19,7 +19,7 @@ Zoom test flow:
   - End test session
 
 Caveats:
-  -At the moment the Zoom script does require the Meeting Host to admit the synthetic user / devi e
+  * At the moment the Zoom script does require the Meeting Host to admit the synthetic user / device
 
 Youtube Live test flow:
   - Navigate to YouTube app
@@ -30,7 +30,7 @@ Youtube Live test flow:
   - End test session
 
 Caveats:
-  - None
+  * None
 
 
 Call of Duty test flow:
@@ -39,6 +39,8 @@ Call of Duty test flow:
   - Login to existing user
   - Navigate around some popups
   - REQUIRE USER INPUT TO JOIN A MULTIPLAYER GAME
-      * At the moment the script can't click the 'join' button for some reason.  Still investigating the cause
   - Move around the map in a somewhat chaotic pattern for a configurable amount of time
   - End test session
+
+Caveats:
+  * At the moment the script can't click the 'join' button for some reason.  Still investigating the cause
