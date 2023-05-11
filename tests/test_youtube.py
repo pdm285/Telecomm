@@ -46,12 +46,12 @@ caps["headspin:controlLock"]="true"
 # START PERFORMANCE CAPTURE
 # caps["headspin:capture"]="true"
 
+driver = webdriver.Remote(hub_url, caps)
 
 
 
 try:
     # Create the Appium driver
-    driver = webdriver.Remote(hub_url, caps)
     wait = WebDriverWait(driver, 15)
 
 
