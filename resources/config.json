@@ -1,0 +1,12 @@
+{
+    "HS_TOKEN" : "",
+    "Devices":{
+        "deviceName": "SM-G998U1",
+        "udid": "R5CR7165CTZ",
+        "automationName": "uiautomator2",
+        "appPackage": "com.android.settings",
+        "platformName": "android",
+        "appActivity": "com.android.settings.Settings",
+        "URL": "https://teleworld-us-cha-0.headspin.io:7022/v0/"
+    }
+}

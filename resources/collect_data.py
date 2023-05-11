@@ -6,9 +6,15 @@ import os
 from concurrent.futures import ThreadPoolExecutor
 
 
+# Load JSON data from the config.json file
+with open('resources/config.json', 'r') as file:
+    config_data = json.load(file)
 
-os.environ["HS_TOKEN"] = ''
-auth_token = os.environ.get("HS_TOKEN")
+if(config_data['HS_TOKEN']==None):
+    print("You must configure your api key in the resources/config.json file")
+    exit(1)
+else:
+    TOKEN = config_data['HS_TOKEN']
 
 
 endpoint = 'https://teleworld-api.headspin.io'
@@ -30,7 +36,7 @@ def appendData(masterData, newData, kpi):
 def getFirstData(session):
     try:
         api_endpoint = f'{endpoint}/v0/sessions/timeseries/' + session['session_id'] +'/download?key=blockiness'
-        response = output = requests.get(api_endpoint, headers={'Authorization': 'Bearer {}'.format(auth_token)})
+        response = output = requests.get(api_endpoint, headers={'Authorization': 'Bearer {}'.format(TOKEN)})
         if response.status_code != 200:
             print("Failed to retrieve first data.")
             return []
@@ -57,7 +63,7 @@ def getFirstData(session):
 def collectData(session, kpi, masterData):
     try:
         api_endpoint = f'{endpoint}/v0/sessions/timeseries/' + session['session_id'] +'/download?key=' + kpi
-        response = output = requests.get(api_endpoint, headers={'Authorization': 'Bearer {}'.format(auth_token)})
+        response = output = requests.get(api_endpoint, headers={'Authorization': 'Bearer {}'.format(TOKEN)})
         if response.status_code != 200:
             print(f"Failed to retrieve {kpi} data.")
             return []
@@ -83,7 +89,7 @@ def collectData(session, kpi, masterData):
 def collectSessions():
     try:
         api_endpoint = f"{endpoint}/v0/sessions?include_all=true&num_sessions={session_count}"
-        response = requests.get(api_endpoint, headers={'Authorization': 'Bearer {}'.format(auth_token)})
+        response = requests.get(api_endpoint, headers={'Authorization': 'Bearer {}'.format(TOKEN)})
         response = json.loads(response.text)
         for i in range(len(response['sessions'])):
             if(response['sessions'][i]['state'] != 'ended'):
