@@ -2,12 +2,15 @@ import requests
 import json
 import datetime  
 import csv
+import os
 from concurrent.futures import ThreadPoolExecutor
 
 
 
+os.environ["HS_TOKEN"] = ''
+auth_token = os.environ.get("HS_TOKEN")
 
-auth_token = ''
+
 endpoint = 'https://teleworld-api.headspin.io'
 
 session_count = 1

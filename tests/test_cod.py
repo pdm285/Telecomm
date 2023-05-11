@@ -13,7 +13,7 @@ import os
 
 
 
-os.environ["HS_TOKEN"] = 'd20f04e28a0e436f9899c7aed2f92b82'
+os.environ["HS_TOKEN"] = ''
 TOKEN = os.environ.get("HS_TOKEN")
 ENDPOINT = "https://teleworld-api.headspin.io"
 
@@ -37,6 +37,11 @@ hub_url=f"https://teleworld-us-cha-0.headspin.io:7022/v0/{TOKEN}/wd/hub"
 
 caps["headspin:controlLock"]="true"
 # caps["headspin:capture"]="true"
+
+
+
+
+
 driver = webdriver.Remote(hub_url, caps)
 wait = WebDriverWait(driver, 15)
 

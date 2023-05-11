@@ -1,8 +1,3 @@
-
-from selenium.webdriver.common.action_chains import ActionBuilder
-from selenium.webdriver.common.action_chains import ActionChains
-from appium.webdriver.extensions.action_helpers import PointerInput
-from selenium.webdriver.common.actions import interaction
 from time import sleep
 from appium.webdriver.common.touch_action import TouchAction
 
