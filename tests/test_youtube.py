@@ -5,23 +5,41 @@ from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from os import path
 import os
-import resources.helper
+import sys
+import json
+current_dir = os.path.dirname(os.path.abspath(__file__))
+parent_dir = os.path.dirname(current_dir)
+sys.path.append(parent_dir)
+from resources import helper
 
-os.environ["HS_TOKEN"] = ''
-TOKEN = os.environ.get("HS_TOKEN")
-ENDPOINT = "https://teleworld-api.headspin.io"
 
-userflow = "Play ABC Live Stream on YouTube"
-description = "test"
 
+
+
+# Load JSON data from the config.json file
+with open('resources/config.json', 'r') as file:
+    config_data = json.load(file)
+
+if(config_data['HS_TOKEN']==None):
+    print("You must configure your api key in the resources/config.json file")
+    exit(1)
+
+# Extract the capabilities from the Devices dictionary
+devices = config_data['Devices']
 caps = {
-    "deviceName": "SM-G998U1",
-    "udid": "R5CR7165CTZ",
-    "automationName": "uiautomator2",
-    "appPackage": "com.android.settings",
-    "platformName": "android",
-    "appActivity": "com.android.settings.Settings"
+    'deviceName': devices['deviceName'],
+    'udid': devices['udid'],
+    'automationName': devices['automationName'],
+    'appPackage': devices['appPackage'],
+    'platformName': devices['platformName'],
+    'appActivity': devices['appActivity'],
 }
+
+# Access other values from the config_data dictionary
+hs_token = config_data['HS_TOKEN']
+hub_url = f"{devices['URL']}{hs_token}/wd/hub"
+
+
 
 caps["headspin:controlLock"]="true"
 
@@ -33,15 +51,19 @@ caps["headspin:controlLock"]="true"
 
 try:
     # Create the Appium driver
-    driver = webdriver.Remote('https://teleworld-us-cha-0.headspin.io:7022/v0/{TOKEN}/wd/hub', caps)
+    driver = webdriver.Remote(hub_url, caps)
+    wait = WebDriverWait(driver, 15)
+
+
+
     driver.orientation = "PORTRAIT"
     wait = WebDriverWait(driver, 15)
     session_id = driver.session_id
     #Find & Open YT from settings app
     wait.until(EC.presence_of_element_located((MobileBy.ACCESSIBILITY_ID, "Search settings"))).click()
     search_text = driver.find_element(by=MobileBy.ID, value="com.android.settings.intelligence:id/search_src_text").send_keys("YouTube")
-    resources.helper.tap(driver,479,686)
-    resources.helper.tap(driver,194,2146)
+    helper.tap(driver,479,686)
+    helper.tap(driver,194,2146)
 
     #Find ABC Live cast
     wait.until(EC.presence_of_element_located((MobileBy.ACCESSIBILITY_ID, 'Search'))).click()
@@ -51,9 +73,9 @@ try:
 
 
     # driver.find_element(MobileBy.ACCESSIBILITY_ID,'Latest from ABC News')
-    resources.helper.tap(driver, 355, 527)
+    helper.tap(driver, 355, 527)
 
-    resources.helper.tap(driver,514, 543)
+    helper.tap(driver,514, 543)
 
 
     time.sleep(2)
