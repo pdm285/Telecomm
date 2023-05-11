@@ -7,19 +7,10 @@ from os import path
 import os
 import sys
 import json
-
-
-
-# Add the parent directory (project root) to the sys.path
 current_dir = os.path.dirname(os.path.abspath(__file__))
 parent_dir = os.path.dirname(current_dir)
 sys.path.append(parent_dir)
-
-# Now you can import the helper module
 from resources import helper
-
-# Use helper functions or variables
-
 
 
 
@@ -66,8 +57,8 @@ try:
     #Find & Open Zoom from settings app
     wait.until(EC.presence_of_element_located((MobileBy.ACCESSIBILITY_ID, "Search settings"))).click()
     search_text = driver.find_element(by=MobileBy.ID, value="com.android.settings.intelligence:id/search_src_text").send_keys("Zoom app")
-    helper.tap(driver,255,1037)
-    helper.tap(driver,194,2146)
+    helper.tap(driver,384, 1059)
+    driver.find_element(MobileBy.ID,'com.android.settings:id/button1').click()
 
 
     #Join meeting
