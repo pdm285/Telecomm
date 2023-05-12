@@ -43,7 +43,7 @@ hub_url = f"{devices['URL']}{hs_token}/wd/hub"
 caps["headspin:controlLock"]="true"
 
 # START PERFORMANCE CAPTURE
-# caps["headspin:capture"]="true"
+caps["headspin:capture"]="true"
 
 
 
@@ -60,18 +60,20 @@ try:
     #Find & Open COD from settings app
     wait.until(EC.presence_of_element_located((MobileBy.ACCESSIBILITY_ID, "Search settings"))).click()
     search_text = driver.find_element(by=MobileBy.ID, value="com.android.settings.intelligence:id/search_src_text").send_keys("Call of Duty")
+    time.sleep(1)
     helper.tap(driver,479,686)
     
     driver.find_element(MobileBy.ID,'com.android.settings:id/button1').click()
 
 
+
+    # Wait 2 minutes to download resources
     wait = WebDriverWait(driver, 120)
     wait.until(EC.presence_of_element_located((MobileBy.ID, 'com.google.android.gms:id/account_display_name'))).click()
     
 
 
     time.sleep(15)
-
     #Click [X] in pop up menu
     for i in range(3):
         helper.tap(driver,1760,194)

@@ -44,7 +44,7 @@ hub_url = f"{devices['URL']}{hs_token}/wd/hub"
 caps["headspin:controlLock"]="true"
 
 # START PERFORMANCE CAPTURE
-# caps["headspin:capture"]="true"
+caps["headspin:capture"]="true"
 
 driver = webdriver.Remote(hub_url, caps)
 
