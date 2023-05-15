@@ -57,6 +57,7 @@ try:
     #Find & Open Zoom from settings app
     wait.until(EC.presence_of_element_located((MobileBy.ACCESSIBILITY_ID, "Search settings"))).click()
     search_text = driver.find_element(by=MobileBy.ID, value="com.android.settings.intelligence:id/search_src_text").send_keys("Zoom app")
+    time.sleep(1)
     helper.tap(driver,384, 1059)
     driver.find_element(MobileBy.ID,'com.android.settings:id/button1').click()
 
@@ -69,22 +70,21 @@ try:
 
     wait.until(EC.presence_of_element_located((MobileBy.ID,"us.zoom.videomeetings:id/btnJoinConf"))).click()
     conference = driver.find_element(by=MobileBy.ID, value="us.zoom.videomeetings:id/edtConfNumber")
-    conference.send_keys("9751892899")
+    conference.send_keys("5578624591")
     join = driver.find_element(by=MobileBy.ID, value="us.zoom.videomeetings:id/btnJoin")
     join.click()
     time.sleep(1)
-    passcode = driver.find_element(by=MobileBy.ID, value="us.zoom.videomeetings:id/edtPassword")
-    passcode.send_keys("Cpe2PA")
-    time.sleep(1)
 
-    join = driver.find_element(by=MobileBy.ID, value="us.zoom.videomeetings:id/button1")
-    join.click()
-    
+    driver.find_element(by=MobileBy.ID, value="us.zoom.videomeetings:id/btnJoinWithVideo").click()
 
 
+
+
+    print('awaiting to be let into room')
+    time.sleep(5)
     wait.until(EC.presence_of_element_located((MobileBy.ID,"us.zoom.videomeetings:id/txtCallViaVoIP"))).click()
 
-    helper.tap(driver,281, 2136)
+
 
 
     # Timer 15 cycles of 60 seconds
