@@ -4,19 +4,21 @@ import sys
 import requests
 import csv
 import datetime
+import pandas as pd
 
 # Set the session ID from the provided parameter
 SESSION_ID = sys.argv[1]
 
 # Set your key
-KEY = None
+KEY = (None or os.environ['HS_TOKEN'])
 
 # Check if the session ID parameter is provided
 if len(sys.argv) < 2:
     print("Please provide the session ID as a parameter.")
     sys.exit(1)
-if (KEY==None)
+if (KEY==None):
     print("Please provide your HS AUTH KEY in line 12")
+    sys.exit(1)
 
 # Define the list of KPIs
 KPI_LIST = [
@@ -89,3 +91,34 @@ for KPI in KPI_LIST:
     os.replace(OUTPUT_FILE + '.tmp', OUTPUT_FILE)
 
 print(f"The CSV files in {SESSION_FOLDER} have been updated with the desired format")
+
+
+
+
+API_ENDPOINT = f"https://teleworld-api.headspin.io/v0/sessions/analysis/issues/{SESSION_ID}"
+
+
+data = requests.get(API_ENDPOINT, headers=headers).json()
+
+
+
+def xls_title(string):
+    return string[:25]
+
+
+OUTPUT_FILE = f"{SESSION_FOLDER}/issues.xlsx"
+
+# Create an ExcelWriter object
+writer = pd.ExcelWriter(OUTPUT_FILE, engine='openpyxl')
+
+# Iterate over each key-value pair in the data dictionary
+for sheet_name, sheet_data in data.items():
+    # Create a DataFrame for the current sheet data
+    df = pd.DataFrame(sheet_data)
+    sheet_name = sheet_name.replace(':'," -")
+    sheet_name = xls_title(sheet_name)
+    # Write the DataFrame to the Excel file
+    df.to_excel(writer, sheet_name=sheet_name, index=False)
+
+# Save the Excel file
+writer.close()
