@@ -5,19 +5,25 @@ import requests
 import csv
 import datetime
 import pandas as pd
+import json
 
 # Set the session ID from the provided parameter
 SESSION_ID = sys.argv[1]
 
+
+# Load JSON data from the config.json file
+with open('resources/config.json', 'r') as file:
+    config_data = json.load(file)
+    HS_TOKEN = config_data['HS_TOKEN']
 # Set your key
-KEY = (None or os.environ['HS_TOKEN'])
+KEY = (HS_TOKEN or os.environ['HS_TOKEN'])
 
 # Check if the session ID parameter is provided
 if len(sys.argv) < 2:
     print("Please provide the session ID as a parameter.")
     sys.exit(1)
 if (KEY==None):
-    print("Please provide your HS AUTH KEY in line 12")
+    print("Please provide your HS_TOKEN in the resources/config.json file")
     sys.exit(1)
 
 # Define the list of KPIs
