@@ -13,50 +13,31 @@ sys.path.append(parent_dir)
 from resources import helper
 
 
-
-
 # Load JSON data from the config.json file
 with open('resources/config.json', 'r') as file:
     config_data = json.load(file)
 
-if(config_data['HS_TOKEN']==None):
-    print("You must configure your api key in the resources/config.json file")
-    exit(1)
 
 # Extract the capabilities from the Devices dictionary
-devices = config_data['Devices']
-caps = {
-    'deviceName': devices['deviceName'],
-    'udid': devices['udid'],
-    'automationName': devices['automationName'],
-    'appPackage': devices['appPackage'],
-    'platformName': devices['platformName'],
-    'appActivity': devices['appActivity'],
-}
+caps = config_data['Devices']
 
-# Access other values from the config_data dictionary
-hs_token = config_data['HS_TOKEN']
-hub_url = f"{devices['URL']}{hs_token}/wd/hub"
+caps["headspin:capture"] = False
+caps["headspin:capture.video"] = True
 
+# Create driver
+try:
+    driver = webdriver.Remote(f"https://{config_data['URL']}{config_data['HS_TOKEN']}/wd/hub", caps)
+except Exception as e:
+    print("error starting driver.  Stacktrace:")
+    print(f"{e}")
+    sys.exit(-1)
 
-
-caps["headspin:controlLock"]="true"
-
-# START PERFORMANCE CAPTURE
-caps["headspin:capture"]="true"
-
-
+wait = WebDriverWait(driver, 15)
+driver.orientation = "PORTRAIT"
+session_id = driver.session_id
 
 
 try:
-    # Create the Appium driver
-    driver = webdriver.Remote(hub_url, caps)
-    wait = WebDriverWait(driver, 15)
-
-
-
-
-    session_id = driver.session_id
     #Find & Open COD from settings app
     wait.until(EC.presence_of_element_located((MobileBy.ACCESSIBILITY_ID, "Search settings"))).click()
     search_text = driver.find_element(by=MobileBy.ID, value="com.android.settings.intelligence:id/search_src_text").send_keys("Call of Duty")

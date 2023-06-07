@@ -1,5 +1,7 @@
 {
-    "HS_TOKEN" : "",
+    "HS_TOKEN" : "d20f04e28a0e436f9899c7aed2f92b82",
+    "API_BASE": "teleworld-api.headspin.io",
+    "URL": "teleworld-us-cha-0.headspin.io:7022/v0/",
     "Devices":{
         "deviceName": "SM-G998U1",
         "udid": "R5CR7165CTZ",
@@ -7,6 +9,8 @@
         "appPackage": "com.android.settings",
         "platformName": "android",
         "appActivity": "com.android.settings.Settings",
-        "URL": "https://teleworld-us-cha-0.headspin.io:7022/v0/"
+        "URL": "teleworld-us-cha-0.headspin.io:7022/v0/",
+        "headspin:capture":true,
+        "headspin:controlLock":true
     }
 }

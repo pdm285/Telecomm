@@ -13,43 +13,20 @@ sys.path.append(parent_dir)
 from resources import helper
 
 
+# Set the session ID from the provided parameter
+config_data = json.loads(sys.argv[1])
 
-# Load JSON data from the config.json file
-with open('resources/config.json', 'r') as file:
-    config_data = json.load(file)
-
-if(config_data['HS_TOKEN']==None):
-    print("You must configure your api key in the resources/config.json file")
-    exit(1)
-
-# Extract the capabilities from the Devices dictionary
-devices = config_data['Devices']
-caps = {
-    'deviceName': devices['deviceName'],
-    'udid': devices['udid'],
-    'automationName': devices['automationName'],
-    'appPackage': devices['appPackage'],
-    'platformName': devices['platformName'],
-    'appActivity': devices['appActivity'],
-}
-
-# Access other values from the config_data dictionary
-hs_token = config_data['HS_TOKEN']
-hub_url = f"{devices['URL']}{hs_token}/wd/hub"
-
-
-
-caps["headspin:controlLock"]="true"
-
-# START PERFORMANCE CAPTURE
-# caps["headspin:capture"]="true"
-
-
+# Create driver
+try:
+   driver = webdriver.Remote(f"https://{config_data['URL']}{config_data['HS_TOKEN']}/wd/hub", config_data['Devices'])
+except Exception as e:
+    print("error starting driver.  Stacktrace:")
+    print("{e}")
+    sys.exit(-1)
 
 
 try:
     # Create the Appium driver
-    driver = webdriver.Remote(hub_url, caps)
     driver.orientation = "PORTRAIT"
     wait = WebDriverWait(driver, 15)
     session_id = driver.session_id
