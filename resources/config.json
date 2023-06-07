@@ -1,5 +1,5 @@
 {
-    "HS_TOKEN" : "d20f04e28a0e436f9899c7aed2f92b82",
+    "HS_TOKEN" : "",
     "API_BASE": "teleworld-api.headspin.io",
     "URL": "teleworld-us-cha-0.headspin.io:7022/v0/",
     "Devices":{
@@ -10,7 +10,7 @@
         "platformName": "android",
         "appActivity": "com.android.settings.Settings",
         "URL": "teleworld-us-cha-0.headspin.io:7022/v0/",
-        "headspin:capture":true,
+        "headspin:capture":false,
         "headspin:controlLock":true
     }
 }
