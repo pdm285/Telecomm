@@ -10,7 +10,6 @@ import json
 # Set the session ID from the provided parameter
 SESSION_ID = sys.argv[1]
 
-
 # Load JSON data from the config.json file
 with open('resources/config.json', 'r') as file:
     config_data = json.load(file)
@@ -54,7 +53,9 @@ SESSION_FOLDER = f"session_{SESSION_ID}"
 os.makedirs(SESSION_FOLDER, exist_ok=True)
 
 # Retrieve start time of session
-API_ENDPOINT = f"https://teleworld-api.headspin.io/v0/sessions/{SESSION_ID}/timestamps"
+API_ENDPOINT = f"https://{config_data['API_BASE']}/v0/sessions/{SESSION_ID}/timestamps"
+
+# API_ENDPOINT = f"https://teleworld-api.headspin.io/v0/sessions/{SESSION_ID}/timestamps"
 headers = {
     "Authorization": f"Bearer {KEY}"
 }
@@ -104,7 +105,7 @@ print(f"The CSV files in {SESSION_FOLDER} have been updated with the desired for
 API_ENDPOINT = f"https://teleworld-api.headspin.io/v0/sessions/analysis/issues/{SESSION_ID}"
 
 
-data = requests.get(API_ENDPOINT, headers=headers).json()
+DATA = requests.get(API_ENDPOINT, headers=headers).json()
 
 
 
@@ -115,16 +116,16 @@ def xls_title(string):
 OUTPUT_FILE = f"{SESSION_FOLDER}/issues.xlsx"
 
 # Create an ExcelWriter object
-writer = pd.ExcelWriter(OUTPUT_FILE, engine='openpyxl')
+WRITER = pd.ExcelWriter(OUTPUT_FILE, engine='openpyxl')
 
 # Iterate over each key-value pair in the data dictionary
-for sheet_name, sheet_data in data.items():
+for sheet_name, sheet_data in DATA.items():
     # Create a DataFrame for the current sheet data
     df = pd.DataFrame(sheet_data)
     sheet_name = sheet_name.replace(':'," -")
     sheet_name = xls_title(sheet_name)
     # Write the DataFrame to the Excel file
-    df.to_excel(writer, sheet_name=sheet_name, index=False)
+    df.to_excel(WRITER, sheet_name=sheet_name, index=False)
 
 # Save the Excel file
-writer.close()
+WRITER.close()
