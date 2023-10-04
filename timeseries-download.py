@@ -3,7 +3,7 @@ import os
 import json
 
 # Set your token from https://ui.headspin.io/mysettings
-TOKEN = "dd83765cb7d04271847dcac5ed07823b"
+TOKEN = ""
 
 # Enter the number of sessions to download
 DATE="10-03-2023"
