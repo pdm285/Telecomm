@@ -3,10 +3,10 @@ import os
 import json
 
 # Set your token from https://ui.headspin.io/mysettings
-TOKEN = ""
+TOKEN = "dd83765cb7d04271847dcac5ed07823b"
 
 # Enter the number of sessions to download
-NUM=10
+DATE="10-03-2023"
 
 # Enter the API Base URL.  The default is https://api-dev.headspin.io but can change in AIR GAP or self hosted models
 BASE_URL = 'https://api-dev.headspin.io'
@@ -93,8 +93,8 @@ def exportJSON(DATA):
 
 
 # Function to collect NUM ammount of sessions (defined at the top)
-def collectSessions(NUM):
-    SESSIONS_API = f'{BASE_URL}/v0/sessions?include_all=true&num_sessions={NUM}'
+def collectSessions(DATE):
+    SESSIONS_API = f'{BASE_URL}/v0/sessions?include_all=true&tag=date:{DATE}'
     try:
         response = requests.get(SESSIONS_API, headers={'Authorization': 'Bearer {}'.format(TOKEN)})
         response = json.loads(response.text)
@@ -109,7 +109,7 @@ def collectSessions(NUM):
 
 # PROGRAM MAIN
 if __name__:
-    SESSIONS = collectSessions(NUM)
+    SESSIONS = collectSessions(DATE)
     for SESSION in SESSIONS:
         try:
             print(f"Downloading data for {SESSION['session_id']}")
