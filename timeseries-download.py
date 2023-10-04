@@ -3,7 +3,7 @@ import os
 import json
 
 # Set your token from https://ui.headspin.io/mysettings
-TOKEN = ""
+TOKEN = "dd83765cb7d04271847dcac5ed07823b"
 
 # Enter the number of sessions to download
 DATE="10-03-2023"
@@ -97,11 +97,11 @@ def collectSessions(DATE):
     SESSIONS_API = f'{BASE_URL}/v0/sessions?include_all=true&tag=date:{DATE}'
     try:
         response = requests.get(SESSIONS_API, headers={'Authorization': 'Bearer {}'.format(TOKEN)})
-        response = json.loads(response.text)
-        for i in range(len(response['sessions'])):
-            if(response['sessions'][i]['state'] != 'ended'):
-                response['sessions'].pop(i)
-        return response['sessions']
+        SESSIONS = json.loads(response.text)['sessions']
+        for SESSION in SESSIONS:
+            if(SESSION['state'] != 'ended'):
+                SESSION.pop()
+        return SESSIONS
     except Exception as e:
         print(f"Error in collectSessions function: {e}")
         return []
